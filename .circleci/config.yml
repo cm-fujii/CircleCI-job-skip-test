@@ -26,6 +26,7 @@ jobs:
   deploy:
     executor: normal_container
     steps:
+      - checkout
       - run:
           name: deploy
           command: |
