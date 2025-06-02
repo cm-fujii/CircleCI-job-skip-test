@@ -8,9 +8,9 @@ changed_files=$(git diff --name-only "origin/main" "HEAD")
 # CODEOWNERSファイルのみが変更されているかチェック
 if [[ "$changed_files" == ".github/CODEOWNERS" ]]; then
     echo "Only CODEOWNERS file changed"
-    exit 1
+    exit 0
 fi
 
 echo "Not only CODEOWNERS file changed"
-exit 0
+exit 1
 
