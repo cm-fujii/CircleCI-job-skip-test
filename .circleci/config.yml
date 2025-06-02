@@ -15,6 +15,14 @@ jobs:
           command: |
             echo "run unit-test"
 
+            if ./change_codeowners_only.sh; then
+                echo "This job is skipped because only CODEOWNERS file was changed."
+                circleci-agent step halt
+            fi
+
+            echo "Running unit tests..."
+
+
   deploy:
     executor: normal_container
     steps:
@@ -22,6 +30,13 @@ jobs:
           name: deploy
           command: |
             echo "run deploy"
+
+            if ./change_codeowners_only.sh; then
+                echo "This job is skipped because only CODEOWNERS file was changed."
+                circleci-agent step halt
+            fi
+
+            echo "Running deployment..."
 
 workflows:
   release:
