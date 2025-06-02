@@ -1,0 +1,33 @@
+version: 2.1
+
+executors:
+  normal_container:
+    docker:
+      - image: cimg/node:lts
+
+jobs:
+  unit-test:
+    executor: normal_container
+    steps:
+      - checkout
+      - run:
+          name: unit-test
+          command: |
+            echo "run unit-test"
+
+  deploy:
+    executor: normal_container
+    steps:
+      - run:
+          name: deploy
+          command: |
+            echo "run deploy"
+
+workflows:
+  release:
+    jobs:
+      - unit-test
+      - deploy:
+          requires:
+            - unit-test
+
