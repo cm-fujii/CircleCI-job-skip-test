@@ -20,7 +20,7 @@ jobs:
                 circleci-agent step halt
             fi
 
-            sleep 10
+            sleep 20
 
             echo "Running unit tests..."
 
@@ -39,7 +39,7 @@ jobs:
                 circleci-agent step halt
             fi
 
-            sleep 10
+            sleep 20
 
             echo "Running deployment..."
 
