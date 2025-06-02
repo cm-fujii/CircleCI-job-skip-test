@@ -20,6 +20,8 @@ jobs:
                 circleci-agent step halt
             fi
 
+            sleep 10
+
             echo "Running unit tests..."
 
 
@@ -36,6 +38,8 @@ jobs:
                 echo "This job is skipped."
                 circleci-agent step halt
             fi
+
+            sleep 10
 
             echo "Running deployment..."
 
