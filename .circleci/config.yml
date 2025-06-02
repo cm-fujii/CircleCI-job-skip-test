@@ -15,8 +15,8 @@ jobs:
           command: |
             echo "run unit-test"
 
-            if ./change_codeowners_only.sh; then
-                echo "This job is skipped because only CODEOWNERS file was changed."
+            if ./check_skip_job.sh; then
+                echo "This job is skipped."
                 circleci-agent step halt
             fi
 
@@ -32,8 +32,8 @@ jobs:
           command: |
             echo "run deploy"
 
-            if ./change_codeowners_only.sh; then
-                echo "This job is skipped because only CODEOWNERS file was changed."
+            if ./check_skip_job.sh; then
+                echo "This job is skipped."
                 circleci-agent step halt
             fi
 
