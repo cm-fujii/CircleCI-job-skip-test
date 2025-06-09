@@ -5,43 +5,40 @@ executors:
     docker:
       - image: cimg/node:lts
 
+commands:
+  check_skip_job:
+    description: "Check if job should be skipped"
+    steps:
+      - run:
+          name: Check if job should be skipped
+          command: |
+            if ./check_skip_job.sh; then
+                echo "This job is skipped."
+              circleci-agent step halt
+            else
+              echo "Job will run."
+            fi
+
 jobs:
   unit-test:
     executor: normal_container
     steps:
       - checkout
+      - check_skip_job
       - run:
           name: unit-test
           command: |
             echo "run unit-test"
 
-            if ./check_skip_job.sh; then
-                echo "This job is skipped."
-                circleci-agent step halt
-            fi
-
-            sleep 10
-
-            echo "Running unit tests..."
-
-
   deploy:
     executor: normal_container
     steps:
       - checkout
+      - check_skip_job
       - run:
           name: deploy
           command: |
             echo "run deploy"
-
-            if ./check_skip_job.sh; then
-                echo "This job is skipped."
-                circleci-agent step halt
-            fi
-
-            sleep 10
-
-            echo "Running deployment..."
 
 workflows:
   release:
