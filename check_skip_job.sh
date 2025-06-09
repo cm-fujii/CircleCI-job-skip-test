@@ -1,16 +1,14 @@
 #!/bin/bash
 
-# CODEOWNERSファイルのみが変更されているか？　を確認するスクリプト
+# pull_request_template.md のみが変更されているか？　を確認するスクリプト
 
 # 変更されたファイルを取得
 changed_files=$(git diff --name-only "origin/main" "HEAD")
 
-# CODEOWNERSファイルのみが変更されているかチェック
-if [[ "$changed_files" == ".github/CODEOWNERS" ]]; then
-    echo "Only CODEOWNERS file changed."
+if [[ "$changed_files" == ".github/pull_request_template.md" ]]; then
+    echo "Only pull_request_template.md has been changed."
     exit 0
 fi
 
-echo "Not only CODEOWNERS file changed."
+echo "Changes detected in files other than pull_request_template.md."
 exit 1
-
